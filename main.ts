@@ -1,19 +1,54 @@
 function bluecontrol () {
     if (uartData == "A") {
-        SuperBit.MotorRunDual(SuperBit.enMotors.M1, 255, SuperBit.enMotors.M3, 255)
+        SuperBit.MotorRunDual(
+        SuperBit.enMotors.M1,
+        255,
+        SuperBit.enMotors.M3,
+        255
+        )
     } else if (uartData == "B") {
-        SuperBit.MotorRunDual(SuperBit.enMotors.M1, -255, SuperBit.enMotors.M3, -255)
+        SuperBit.MotorRunDual(
+        SuperBit.enMotors.M1,
+        -255,
+        SuperBit.enMotors.M3,
+        -255
+        )
     } else if (uartData == "C") {
-        SuperBit.MotorRunDual(SuperBit.enMotors.M1, -255, SuperBit.enMotors.M3, 255)
+        SuperBit.MotorRunDual(
+        SuperBit.enMotors.M1,
+        -255,
+        SuperBit.enMotors.M3,
+        255
+        )
     } else if (uartData == "D") {
-        SuperBit.MotorRunDual(SuperBit.enMotors.M1, 255, SuperBit.enMotors.M3, -255)
+        SuperBit.MotorRunDual(
+        SuperBit.enMotors.M1,
+        255,
+        SuperBit.enMotors.M3,
+        -255
+        )
     } else if (uartData == "0") {
-        SuperBit.MotorRunDual(SuperBit.enMotors.M1, 0, SuperBit.enMotors.M3, 0)
+        SuperBit.MotorRunDual(
+        SuperBit.enMotors.M1,
+        0,
+        SuperBit.enMotors.M3,
+        0
+        )
     }
 }
 bluetooth.onBluetoothDisconnected(function () {
     basic.showIcon(IconNames.Sad)
     connected = 0
+})
+bluetooth.onBluetoothConnected(function () {
+    basic.showIcon(IconNames.Happy)
+    connected = 1
+    while (connected == 1) {
+        uartData = bluetooth.uartReadUntil(serial.delimiters(Delimiters.Hash))
+        bluecontrol()
+        music2()
+        ModeSelect()
+    }
 })
 function ModeSelect () {
     if (uartData == "S") {
@@ -30,16 +65,6 @@ function ModeSelect () {
         g_mode = 0
     }
 }
-bluetooth.onBluetoothConnected(function () {
-    basic.showIcon(IconNames.Happy)
-    connected = 1
-    while (connected == 1) {
-        uartData = bluetooth.uartReadUntil(serial.delimiters(Delimiters.Hash))
-        bluecontrol()
-        music2()
-        ModeSelect()
-    }
-})
 function music2 () {
     music.setVolume(255)
     if (uartData == "1") {
@@ -77,7 +102,7 @@ let uartData = ""
 let connected = 0
 connected = 0
 bluetooth.startUartService()
-basic.showString("JD")
+basic.showString("#")
 basic.forever(function () {
 	
 })
