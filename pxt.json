@@ -4,7 +4,7 @@
     "dependencies": {
         "core": "*",
         "microphone": "*",
-        "SuperBit": "github:YahboomTechnology/SuperBit#a1aa3ca033143a070d67f7005b71fbe6f279402a",
+        "SuperBit": "github:YahboomTechnology/SuperBitLib#941907e488223730b1ee621e382560de6bd0e1cd",
         "bluetooth": "*"
     },
     "files": [
@@ -16,7 +16,7 @@
         "test.ts"
     ],
     "targetVersions": {
-        "target": "7.0.42",
+        "target": "7.0.51",
         "targetId": "microbit"
     },
     "supportedTargets": [
