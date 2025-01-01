@@ -1,5 +1,7 @@
 function bluecontrol () {
     if (uartData == "A") {
+        Track_Num = 4
+        Play_Track()
         SuperBit.MotorRunDual(
         SuperBit.enMotors.M1,
         255,
@@ -48,6 +50,8 @@ l.setUint8(6, 0xEF)
 serial.writeBuffer(l)
 }
 bluetooth.onBluetoothConnected(function () {
+    Track_Num = 9
+    Play_Track()
     basic.showIcon(IconNames.Happy)
     connected = 1
     while (connected == 1) {
@@ -58,6 +62,8 @@ bluetooth.onBluetoothConnected(function () {
 })
 bluetooth.onBluetoothDisconnected(function () {
     basic.showIcon(IconNames.Sad)
+    Track_Num = 2
+    Play_Track()
     connected = 0
 })
 function ModeSelect () {
@@ -88,8 +94,8 @@ serial.writeBuffer(m)
 }
 let g_mode = 0
 let uartData = ""
-let connected = 0
 let Track_Num = 0
+let connected = 0
 serial.redirect(
 SerialPin.P2,
 SerialPin.P1,
@@ -97,6 +103,7 @@ BaudRate.BaudRate9600
 )
 let Volume = 16
 connected = 0
+Track_Num = 0
 bluetooth.startUartService()
 basic.showString("J")
 basic.forever(function () {
